@@ -1,0 +1,27 @@
+version: "3.1"
+
+services:
+
+  masterservice:
+    image: microservice-wordpress
+    privileged: true
+    environment:
+     - NODENAME=microservice-wordpress_masterservice_1.microservice-wordpress_microservice-wordpress
+     - NODENETWORK=microservice-wordpress
+     - DISPLAY=${DISPLAY}
+     - WORDPRESS_DB_HOST=83.212.80.188:3307
+     - WORDPRESS_DB_USER=wordpress
+     - WORDPRESS_DB_PASSWORD=wordpress
+     - WORDPRESS_DB_NAME=wordpress
+    cap_add:
+      - NET_ADMIN
+    user: root
+    entrypoint: ["sec_bootstrap", "role=masterservice", "sec_master_service_name=masterservice"]
+    ports:
+      - "${SSH_PORT}:22"
+      - "${R_PORT1}:3787"  # console
+      - "${R_PORT2}:80"  # web http
+      - "42861:80"
+    volumes:
+      - /home/george/Desktop/test/swarmlab-hybrid/src-local/instance/microservice-wordpress/microservice-wordpress/project:/home/docker/project
+      - /home/george/Desktop/test/swarmlab-hybrid/src-local/instance/microservice-wordpress/microservice-wordpress/bin/ttyd.x86_64:/usr/bin/ttyd

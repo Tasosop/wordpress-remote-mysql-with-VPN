@@ -1,0 +1,70 @@
+Install
+-------
+
+
+Προϋπόθεση για την διεκπεραίωση αποτελούν η εγκατάσταση των:  
+
+[source,perl]
+docker
+docker compose
+
+Η διαδικασία έγινε ύστερα από τo deploying του swarmlab-hybrid 
+
+[source,perl]
+    -> git clone --recurse-submodules https://git.swarmlab.io:3000/zeus/swarmlab-hybrid.git
+    -> cd swarmlab-hybrid
+    -> ./install.sh
+    -> localhost:3088
+
+http://docs.swarmlab.io/SwarmLab-HowTos/swarmlab/docs/swarmlab/docs/install/overview.html
+
+
+Για την εγκατάστασή του ακολουθήθηκαν του *wireguard*: 
+[source,perl]
+sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get install wireguard
+sudo nano /etc/sysctl.conf
+net.ipv4.ip_forward=1
+sudo modprobe wireguard
+
+
+
+Προκειμένου να εκκινήσει η λειτουργία του VPN χρειάζεται η εκτέλεση (και στα 2 μηχανήματα) της εντολής:
+
+[source,perl]
+sudo wg-quick up wg0 
+
+Αντίστοιχα, για να πάψει αυτή η λειτουργία: 
+
+[source,perl]
+sudo wg-quick down wg0
+
+Τα αρχεία .conf που περιέχουν τα configurations για τo VPN σε επίπεδο host και client βρίσκονται στο path 
+[source,perl]
+/etc/wireguard/wg0.conf
+
+ 
+Το *wordpress* το κατεβάζουμε στον client και το τρέχουμε μέσω του swarmlab.io το αρχείο .yml υπάρχει /mySQL/mysql.yml
+
+Για την σύνδεση στο GUI της υπηρεσίας επισκεπτόμαστε την διεύθυνση *localhost:42861*
+
+
+Tη *mySQL* την εκτελούμε στο server:
+[source,perl]
+docker-compose -f ./mysql.ylm up -d
+
+
+Στοιχεία βάσης δεδομένων
+----
+ip address:  83.212.80.188:3307
+username:    wordpress
+password:    wordpress
+----
+
+
+
+
+
+
+
+
