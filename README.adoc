@@ -45,7 +45,11 @@ password:    wordpress
 
 
 
-
+----
+Developers:
+ cs161115
+ cs161017
+----
 
 
 
